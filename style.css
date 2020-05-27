@@ -1,16 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Grid is 28 units w and 28 units h*/
+/* in my case pac-man and ghosts images is 16x16px so grid is 448pxx448px*/
 .grid {
   display: flex;
   flex-wrap: wrap;
-  width: 560px;
-  height: 560px;
+  width: 448px;
+  height: 448px;
   border: solid black;
 }
 
+/* old version is using divs as an characters*/
 .grid div {
   width: 20px;
   height: 20px;
 }
-/*pacman*/
+
+/* my_upgrade using 16px x 16px icons as a characters*/
+.grid img {
+  width: 16px;
+  height: 16px;
+}
+
 .pac-dot {
   background-color: rgb(150, 241, 242);
   border: 5px solid white;
@@ -23,7 +37,7 @@
 
 .power-pellet {
   background-color: rgb(85, 141, 173);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .blinky {
@@ -53,5 +67,5 @@
 
 .pac-man {
   background-color: yellow;
-  border-radius: 10px;
+  border-radius: 8px;
 }

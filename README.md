@@ -7,3 +7,4 @@ Orignal base version in the master branch is exaclty as was shown by [Ania Kubow
 ## my_upgrade branch
 Some visual upgrades: images of ghosts and pac-man, fav-icon and page title.
 Reference for the icon added to the page.
+

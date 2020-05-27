@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const scoreDisplay = document.getElementById('score')
   const width = 28 // 28*28=784squares
   let score = 0
+
   //layout of grid and what is in the squares
   const layout = [
   1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -46,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
   //draw the grid and render it
   function createBoard() {
     for (let i = 0; i < layout.length; i++) {
-      const square = document.createElement('div')
+      const square = document.createElement('img')
+      square.src = ''
       grid.appendChild(square)
       squares.push(square)
 
@@ -68,10 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let pacmanCurrentIndex = 490
 
   squares[pacmanCurrentIndex].classList.add('pac-man')
+  squares[pacmanCurrentIndex].src = 'images/pacman.png'
 
   //move pac-man
   function movePacman(e) {
     squares[pacmanCurrentIndex].classList.remove('pac-man')
+    squares[pacmanCurrentIndex].src = ''
 
     switch (e.keyCode) {
       case 37:
@@ -125,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     squares[pacmanCurrentIndex].classList.add('pac-man')
+    squares[pacmanCurrentIndex].src = 'images/pacman.png'
 
     pacDotEaten()
     powerPelletEaten()
@@ -181,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ghosts.forEach(ghost => {
     squares[ghost.currentIndex].classList.add(ghost.className)
     squares[ghost.currentIndex].classList.add('ghost')
+    squares[ghost.currentIndex].src = 'images/ghost.png'
   })
 
   // move the ghosts randomly
@@ -197,8 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
         !squares[ghost.currentIndex + direction].classList.contains('ghost')
       ) {
         squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
+        squares[ghost.currentIndex].src = ''
         ghost.currentIndex += direction
         squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+        squares[ghost.currentIndex].src = 'images/ghost.png'
       } else
         direction = directions[Math.floor(Math.random() * directions.length)]
       // if the ghost is currently scared
@@ -208,9 +216,11 @@ document.addEventListener('DOMContentLoaded', () => {
       //if ghost is scared and pacman runs into it
       if (ghost.isScared && squares[ghost.currentIndex].classList.contains('pac-man')) {
         squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
+        squares[ghost.currentIndex].src = ''
         ghost.currentIndex = ghost.startIndex
         score += 100
         squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+        squares[ghost.currentIndex].src = 'images/ghost.png'
       }
       checkGameOver()
     }, ghost.speed)
@@ -224,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ) {
       ghosts.forEach(ghost => clearInterval(ghost.timerId))
       document.removeEventListener('keyup', movePacman)
-      //setTimeout(function(){alert('Game Over!')}, 500)
+      setTimeout(function(){alert('Game Over!')}, 500)
       scoreDisplay.innerHTML = 'GAME OVER'
     }
   }
